@@ -1,0 +1,126 @@
+<title>Update Rules</title>
+<style>
+pre{
+	background:#f6f6f6; 
+	border:1px solid #ccc; 
+	padding:10px;
+	border-radius:3px;
+	font-size:16px;
+	line-height:20px;
+	margin:0 auto 10px;
+	white-space:pre-line;
+}
+pre h3{
+	font-size:24px;
+	margin:0;
+}
+</style>
+<pre>
+<h3>WRITE Command</h3>
+Use <strong>**</strong>  between two command to seprate the command.
+Command 1
+**
+Command 2
+
+<strong>Example:</strong>
+ADD_CLM|comp_datatable|ref_id|VARCHAR|20|1|NULL|tel_no
+**
+ADD_CLM|comp_datalist|data_item|INT|1|1|0|final_rate
+**
+ADD_CLM|comp_datalist_##FY##|data_item|INT|1|1|0|final_rate
+</pre>
+
+<pre>
+<h3>CHANGE/CREATE Financial Year Table</h3>
+Use <strong>_##FY##</strong> after the table name to update in financial year table.
+table_name_##FY##
+
+<strong>Example:</strong>
+
+<em><strong>If Change in both the table write command like below:</strong></em>
+ADD_CLM|comp_datalist|data_item|INT|1|1|0|final_rate
+**
+ADD_CLM|comp_datalist_##FY##|data_item|INT|1|1|0|final_rate
+
+<em><strong>To crate both the table master and financial year table (if avilable):</strong></em>
+CRT_TBL|comp_data|
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NULL DEFAULT NULL,
+	`behaviour` VARCHAR(50) NULL DEFAULT NULL,
+	`type` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+**                          
+CRT_TBL|comp_data_##FY##|
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NULL DEFAULT NULL,
+	`behaviour` VARCHAR(50) NULL DEFAULT NULL,
+	`type` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+
+</pre>
+
+<pre>
+<h3>ADD Column</h3>
+ADD_CLM|table_name|column_name|type|constraint|allowNull(Y for NULL, N for NOT NULL)|default(If no default value use NULL)|after
+
+<strong>Example:</strong>
+ADD_CLM|comp_datalist|data_item|INT|1|Y|0|final_rate
+ADD_CLM|comp_datalist_##FY##|data_item|INT|1|Y|NULL|final_rate
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>ALTER Column</h3>
+ALT_CLM|table_name|old_column_name|new_column_name(If no change in name use old column name)|type|constraint|allowNull(Y for NULL, N for NOT NULL)|default(If no default value use NULL)|after
+
+<strong>Example:</strong>
+ALT_CLM|comp_item_master|data_item|data_item|INT|11|N|XYZ|bar_code
+ALT_CLM|comp_item_master|data_item|data_val|INT|11|N|XYZ|bar_code
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>DROP Column</h3>
+DRP_CLM|table_name|column_name
+
+<strong>Example:</strong>
+DRP_CLM|comp_data|md_date
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>CREATE Table</h3>
+CRT_TBL|table_name|add_column_command_comma_seprated
+
+<strong>Example:</strong>
+CRT_TBL|comp_data|
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NULL DEFAULT NULL,
+	`behaviour` VARCHAR(50) NULL DEFAULT NULL,
+	`type` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>RENAME Table</h3>
+RNM_TBL|old_table_name|new_table_name
+
+<strong>Example:</strong>
+RNM_TBL|comp_data|comp_metadata
+RNM_TBL|comp_data_##FY##|comp_metadata_##FY##
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>DROP Table</h3>
+DRP_TBL|table_name
+
+<strong>Example:</strong>
+DRP_CLM|comp_data
+DRP_CLM|comp_data_##FY##
+</pre>
+<!------------------------------------------------------------------------------------------------------------->
+<pre>
+<h3>Run QUERY Direct</h3>
+QRY|query
+
+<strong>Example:</strong>
+QUERY|insert into ##DB##.table (col1,col2) values (1,'AA')
+QUERY|insert into ##DB##.table_##FY## (col1,col2) values (1,'AA')
+</pre>

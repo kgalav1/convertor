@@ -1,0 +1,28 @@
+<h2 *ngIf="selectedFiles.length != 0" class="mt-lg mb-5">
+  <span>Files</span>
+
+</h2>
+<div class="file-cards-container">
+    <div class="file-cards">
+      <app-file-card *ngFor="let file of selectedFiles;let i = index;" [fileName]="file.name" [fileType]="getFileExtension(file)">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{getFileDisplayName(file.name) | uppercase }}</h5>
+            <p class="card-text">{{ getFileExtension(file) }}</p>
+          </div>
+          <div class="card-buttons">            
+            <button class="btn btn-success" *ngIf="extension != ''" (click)="convertImage(file)"><i class="fa fa-convert"></i>{{ extension}} convert</button>
+            <button class="btn btn-primary" (click)="downloadFile(file)"><i class="fa fa-download"></i> Download</button>
+            <button class="btn btn-danger" (click)="deleteFile(i)"><i class="fa fa-trash"></i> Delete</button>
+          </div>
+        </div>
+      </app-file-card>
+    </div> 
+  </div>
+
+  <div class="container" *ngIf="selectedFiles.length != 0">
+if you want to create zip file of your files so please click on it.
+
+    <button class="create-zip-button" (click)="createZip()" >Create ZIP</button>
+  </div>
+
