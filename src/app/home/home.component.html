@@ -23,22 +23,16 @@
               <p class="lead text-white">This site is capable to all type file convertor without using backend!</p>
               <div class="btn-wrapper mt-5">
 
-                <div class="drop-zone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
-                  (dragleave)="onDragLeave($event)">
-                  <p>Drag and drop files here</p>Or <br>
-                  <div>
-                    <input type="file" #fileInput style="display: none;" (change)="onFileSelected()" accept=".jpg,.png"
-                      multiple>
-                    <button (click)="fileInput.click()">Choose Files</button>
-                  </div>
-                </div>
+                <app-drag-drop-file [allowedExtensions_Error]="allowedExtensions_Error"
+                  [allowedExtensions]="allowedExtensions" (SelectedFile)="onselectedFile($event)"></app-drag-drop-file>
+
                 <div class="row">
                   <div class="col">
-                    <label style="color:aliceblue"for="width">Width:</label>
-                    <input  type="number" id="width" [(ngModel)]="imageWidth" placeholder="Enter width">
+                    <label style="color:aliceblue" for="width">Width:</label>
+                    <input type="number" id="width" [(ngModel)]="imageWidth" placeholder="Enter width">
                   </div>
                   <div class="col">
-                    <label  style="color:aliceblue" for="height">Height:</label>
+                    <label style="color:aliceblue" for="height">Height:</label>
                     <input type="number" id="height" [(ngModel)]="imageHeight" placeholder="Enter height">
                   </div>
                   <div class="col-12">
@@ -48,38 +42,7 @@
                       <select id="file-extension" (change)="onExtensionSelected($event.target.value);">
                         <option value="">Select an extension...</option>
                         <optgroup label="Image Files">
-                          <option value=".jpg">.jpg</option>
-                          <option value=".jpeg">.jpeg</option>
-                          <option value=".png">.png</option>
-                          <option value=".gif">.gif</option>
-                          <option value=".bmp">.bmp</option>
-                          <option value=".svg">.svg</option>
-                        </optgroup>
-                        <optgroup label="Document Files">
-                          <option value=".txt">.txt</option>
-                          <option value=".doc">.doc</option>
-                          <option value=".docx">.docx</option>
-                          <option value=".pdf">.pdf</option>
-                          <option value=".xls">.xls</option>
-                          <option value=".xlsx">.xlsx</option>
-                          <option value=".ppt">.ppt</option>
-                          <option value=".pptx">.pptx</option>
-                        </optgroup>
-                        <optgroup label="Audio Files">
-                          <option value=".mp3">.mp3</option>
-                          <option value=".wav">.wav</option>
-                          <!-- Add more audio file extensions as needed -->
-                        </optgroup>
-                        <optgroup label="Video Files">
-                          <option value=".mp4">.mp4</option>
-                          <option value=".avi">.avi</option>
-                          <option value=".mkv">.mkv</option>
-                          <!-- Add more video file extensions as needed -->
-                        </optgroup>
-                        <optgroup label="Compressed Files">
-                          <option value=".zip">.zip</option>
-                          <option value=".rar">.rar</option>
-                          <!-- Add more compressed file extensions as needed -->
+                          <option *ngFor="let file of allowedExtensions" value=".{{file}}">{{file}}</option>
                         </optgroup>
                       </select>
                     </a>
@@ -151,9 +114,90 @@
           <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
+      <!-- Button to trigger the modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#workonit">
+        Work on this types
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="workonit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Image Types</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <li><strong>SVG:</strong> Scalable Vector Graphics - Vector-based image format that supports smooth
+                  lines and curves.</li>
+                <li><strong>TIFF:</strong> Tagged Image File Format - Versatile format for high-quality images with rich
+                  color depth.</li>
+                <li><strong>ICO:</strong> Icon Image - File format for storing icon images primarily associated with
+                  Windows applications.</li>
+                <li><strong>PSD:</strong> Adobe Photoshop Document - Native file format of Adobe Photoshop for advanced
+                  image editing.</li>
+                <li><strong>AI:</strong> Adobe Illustrator Document - Native file format of Adobe Illustrator for
+                  scalable vector graphics.</li>
+                <li><strong>PDF:</strong> Portable Document Format - Document format that can contain images and be
+                  converted to images.</li>
+                <li><strong>EPS:</strong> Encapsulated PostScript - File format for vector graphics and high-resolution
+                  images.</li>
+                <li><strong>TGA:</strong> Truevision Graphics Adapter - Format for storing high-quality images and
+                  animations.</li>
+                <li><strong>HDR:</strong> High Dynamic Range Image - Format for capturing and displaying a wide range of
+                  luminosity levels.</li>
+                <li><strong>EXR:</strong> OpenEXR Image - High-dynamic-range image format for storing and processing HDR
+                  images.</li>
+                <li><strong>PNM:</strong> Portable Any Map - File format for storing images in various color spaces and
+                  bit depths.</li>
+                <li><strong>WBMP:</strong> Wireless Bitmap Image - Bitmap image format for mobile devices.</li>
+                <li><strong>XPM:</strong> X Pixmap - Format for storing color icons and small images.</li>
+                <li><strong>J2K/JPEG2000:</strong> JPEG 2000 Image - Image format with superior compression and image
+                  quality.</li>
+                <li><strong>HEIC/HEIF:</strong> High-Efficiency Image Format - Modern image format that provides high
+                  compression and quality.</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Now we convert image in this point
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Image Types</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <li><strong> jpg  </strong>- JPEG image format</li>
+                <li><strong> jpeg </strong> - JPEG image format</li>
+                <li><strong> png  </strong>- PNG image format</li>
+                <li><strong> gif  </strong>- GIF image format</li>
+                <li><strong> bmp  </strong>- BMP image format</li>
+                <li><strong> webp </strong> - WebP image format</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
-  <app-show-files [data]=data  [extension]=extension [selectedFiles]=selectedFiles></app-show-files>
+
+
+  <app-show-files [data]=data [extension]=extension [selectedFiles]=selectedFiles></app-show-files>
 
 
 

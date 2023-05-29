@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { UnzipfileComponent} from './unzipfile/unzipfile.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes =[
     { path: 'landing',          component: LandingComponent },
     { path: 'login',          component: LoginComponent },
     { path: 'aboutus',          component: AboutusComponent },
+    { path: 'unzipfile', component: UnzipfileComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

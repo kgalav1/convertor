@@ -1,0 +1,9 @@
+<div class="drop-zone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+(dragleave)="onDragLeave($event)">
+<p>Drag and drop files here</p>Or <br>
+<div>
+  <input type="file" #fileInput style="display: none;" (change)="onFileSelected();" accept="{{extentions}}"
+    multiple>
+  <button (click)="fileInput.click()">Choose Files</button>
+</div>
+</div>

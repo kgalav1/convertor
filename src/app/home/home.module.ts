@@ -9,6 +9,7 @@ import { HomeComponent } from './home.component';
 
 import { SectionsModule } from '../sections/sections.module';
 import { ShowFilesComponent } from '../show-files/show-files.component';
+import { DragDropFileComponent } from '../drag-drop-file/drag-drop-file.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import { ShowFilesComponent } from '../show-files/show-files.component';
         NgbModule,
         
     ],
-    declarations: [ HomeComponent,ShowFilesComponent ],
+    declarations: [ HomeComponent,ShowFilesComponent,DragDropFileComponent ],
     exports:[ HomeComponent ],
     providers: []
 })

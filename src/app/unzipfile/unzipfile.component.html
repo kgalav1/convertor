@@ -1,0 +1,60 @@
+<main>
+    <div class="position-relative">
+        <!-- Hero for FREE version -->
+        <section class="section section-lg section-hero section-shaped">
+            <!-- Background circles -->
+            <div class="shape shape-style-1 shape-primary">
+                <span class="span-150"></span>
+                <span class="span-50"></span>
+                <span class="span-50"></span>
+                <span class="span-75"></span>
+                <span class="span-100"></span>
+                <span class="span-75"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+            </div>
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 text-center">
+                          <!-- <img src="./assets/img/brand/argon-white.png" style="width: 200px;" class="img-fluid"> -->
+                          <p class="lead text-white">Upload Zip File for unzip file </p>
+                          <div class="btn-wrapper mt-5">
+                            <div class="drop-zone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+                              (dragleave)="onDragLeave($event)">
+                              <p>Drag and drop Zip files here</p>Or<br>
+                              <div>
+                                <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+                                <button (click)="fileInput.click()">Choose Files</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div id="fileList" class="mt-5">
+                            <ul>
+                              <li *ngFor="let file of extractedFiles">
+                                {{ file.fileName }}
+                                <button (click)="downloadFile(file.filePath)">Download</button>
+                                <button (click)="deleteFile(file.filePath)">Delete</button>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew zindex-100">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+    </div>
+    <!-- <app-show-files [data]=data  [extension]=extension [selectedFiles]=selectedFiles></app-show-files> -->
+    <div id="fileList"></div>
+
+
+</main>

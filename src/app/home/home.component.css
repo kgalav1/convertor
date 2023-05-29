@@ -1,22 +1,3 @@
-.drop-zone {
-    width: 100%;
-    height: 150px;
-    border: 2px dashed #ccc;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-  }
-  
-  .drop-zone.drag-over {
-    border-color: #ff4081;
-  }
-  
-  .drop-zone p {
-    margin-top: 10px;
-  }
 
 
 

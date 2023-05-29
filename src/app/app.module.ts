@@ -15,6 +15,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 import { HomeModule } from './home/home.module';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { UnzipfileComponent } from './unzipfile/unzipfile.component';
+// import { DragDropFileComponent } from './drag-drop-file/drag-drop-file.component';
 
 // import { UploadsfileComponent } from './uploadsfile/uploadsfile.component';
 // import { LoginComponent } from './login/login.component';
@@ -29,6 +31,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     NavbarComponent,
     FooterComponent,
     AboutusComponent,
+    UnzipfileComponent
+    // DragDropFileComponent,
     // ShowFilesComponent,
     // UploadsfileComponent,
     // LoginComponent

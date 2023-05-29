@@ -197,73 +197,72 @@ export class ShowFilesComponent implements OnInit {
   //   });
   // }
 
-//   convertImage(file: File) {
-//     const reader = new FileReader();
-//     // Check if the file has the same extension as the desired file extension
-//     const fileExtensionRegex = /(?:\.([^.]+))?$/;
-    
-//     const originalExtension = fileExtensionRegex.exec(file.name)[1];
-// console.log(originalExtension)
-//     if ('.'+originalExtension === this.extension) {
-//       console.log('Selected file has a different extension. Please choose a file with the correct extension.');
-//       alert('Selected file has a different extension. Please choose a file with the correct extension.')
-//       return false;
-//     }
-
-//     reader.onload = (event: any) => {
-//       const img = new Image();
-
-//       img.onload = () => {
-//         const canvas = document.createElement('canvas');
-//         const ctx = canvas.getContext('2d');
-
-//         // Resize the image
-//         const maxWidth = 1200;
-//         const maxHeight =800;
-//         let width = img.width;
-//         let height = img.height;
-
-//         if (width > maxWidth) {
-//           height *= maxWidth / width;
-//           width = maxWidth;
-//         }
-
-//         if (height > maxHeight) {
-//           width *= maxHeight / height;
-//           height = maxHeight;
-//         }
-
-//         canvas.width = width;
-//         canvas.height = height;
-
-//         // Draw the resized image on the canvas
-//         ctx.drawImage(img, 0, 0, width, height);
-
-//         // Convert the canvas image to a data URL with the specified file extension
-//         const convertedImageDataUrl = canvas.toDataURL(`image/${this.extension}`);
-
-//         // Create a download link for the converted image
-//         const downloadLink = document.createElement('a');
-//         downloadLink.href = convertedImageDataUrl;
-//         downloadLink.download = `converted_image.${this.extension}`;
-
-//         // Append the download link to the DOM
-//         document.body.appendChild(downloadLink);
-
-//         // Trigger the download
-//         downloadLink.click();
-
-//         // Clean up the download link from the DOM
-//         document.body.removeChild(downloadLink);
-//       };
-
-//       img.src = event.target.result;
-//     };
-
-//     reader.readAsDataURL(file);
-//   }
-
   convertImage(file: File) {
+    const reader = new FileReader();
+    // Check if the file has the same extension as the desired file extension
+    const fileExtensionRegex = /(?:\.([^.]+))?$/;
+    
+    const originalExtension = fileExtensionRegex.exec(file.name)[1];      
+    if ('.'+originalExtension === this.extension) {
+      // console.log('Selected file has a different extension. Please choose a file with the correct extension. this extention already convert' + this.extension);
+      alert('Selected file has a different extension. Please choose a file with the correct extension.this extention already convert ' + originalExtension)
+      return false;
+    }
+
+    reader.onload = (event: any) => {
+      const img = new Image();
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Resize the image
+        const maxWidth = 1200;
+        const maxHeight =800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw the resized image on the canvas
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert the canvas image to a data URL with the specified file extension
+        const convertedImageDataUrl = canvas.toDataURL(`image/${this.extension}`);
+
+        // Create a download link for the converted image
+        const downloadLink = document.createElement('a');
+        downloadLink.href = convertedImageDataUrl;
+        downloadLink.download = `converted_image.${this.extension}`;
+
+        // Append the download link to the DOM
+        document.body.appendChild(downloadLink);
+
+        // Trigger the download
+        downloadLink.click();
+
+        // Clean up the download link from the DOM
+        document.body.removeChild(downloadLink);
+      };
+
+      img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  convertImages(file: File) {
      const width : any = this.data.imageWidth;
      const height : any =this.data.imageHeight;
     const reader = new FileReader();
@@ -290,8 +289,8 @@ export class ShowFilesComponent implements OnInit {
           newHeight = width / aspectRatio;
         }
 
-        canvas.width = newWidth;
-        canvas.height = newHeight;
+        canvas.width = 800;
+        canvas.height = 1200;
 
         // Draw the resized image on the canvas
         ctx.drawImage(img, 0, 0, newWidth, newHeight);
